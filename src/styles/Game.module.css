@@ -1,0 +1,235 @@
+/* Custom styling for retro pixel RPG */
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&family=Outfit:wght@400;600;800&display=swap');
+
+.container {
+  min-height: 100vh;
+  background-color: #0b0c10;
+  background-image: 
+    radial-gradient(circle at 20% 30%, rgba(114, 9, 183, 0.1) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(76, 201, 240, 0.1) 0%, transparent 40%);
+  color: #f4f4f9;
+  font-family: 'Outfit', sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.pixelFont {
+  font-family: 'Press Start 2P', monospace;
+  line-height: 1.6;
+}
+
+.title {
+  font-size: 2.25rem;
+  color: #ffb703;
+  text-shadow: 0 4px #fb8500, 0 8px #000;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #8d99ae;
+  margin-bottom: 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.gameWrapper {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  max-width: 1100px;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+@media (max-width: 900px) {
+  .gameWrapper {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+/* Glassmorphism Panel */
+.panel {
+  background: rgba(26, 28, 46, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  width: 100%;
+}
+
+.sidePanel {
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.hudHeader {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.hudHeader h2 {
+  font-size: 1rem;
+  color: #4cc9f0;
+}
+
+.statRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.statLabel {
+  font-size: 0.8rem;
+  color: #adb5bd;
+}
+
+.statVal {
+  font-weight: bold;
+}
+
+/* Custom RPG Bars */
+.barContainer {
+  background-color: #212529;
+  border-radius: 4px;
+  height: 16px;
+  overflow: hidden;
+  border: 1px solid #495057;
+  position: relative;
+  width: 100%;
+}
+
+.hpBar {
+  background: linear-gradient(90deg, #e63946, #d90429);
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.xpBar {
+  background: linear-gradient(90deg, #38b000, #007200);
+  height: 100%;
+  transition: width 0.3s ease;
+}
+
+.barText {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.65rem;
+  font-family: 'Press Start 2P', monospace;
+  color: #fff;
+  text-shadow: 1px 1px #000;
+}
+
+/* Controls Grid */
+.controlsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.btn {
+  background-color: #1a1c2e;
+  border: 2px solid #ffb703;
+  color: #ffb703;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.75rem;
+  padding: 0.75rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px #fb8500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px #fb8500;
+  background-color: #ffb703;
+  color: #1a1c2e;
+}
+
+.btn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px #fb8500;
+}
+
+.disabledBtn {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none !important;
+  transform: none !important;
+}
+
+.instructions {
+  margin-top: 1.5rem;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: 8px;
+  border-left: 4px solid #ffb703;
+}
+
+.instructions p {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+  color: #ccc;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.keycap {
+  background: #212529;
+  border: 1px solid #495057;
+  border-radius: 4px;
+  padding: 2px 6px;
+  font-family: monospace;
+  color: #fff;
+  box-shadow: 0 2px #000;
+}
+
+/* Modal Overlay */
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(11, 12, 16, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  padding: 2rem;
+  text-align: center;
+}
+
+.overlayTitle {
+  font-size: 1.75rem;
+  color: #ffb703;
+  margin-bottom: 1rem;
+  text-shadow: 0 2px #000;
+}
+
+.overlayText {
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+  color: #adb5bd;
+}
