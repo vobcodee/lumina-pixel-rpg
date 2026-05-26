@@ -58,6 +58,25 @@ export default function Home() {
     }
   };
 
+  // Simulate keyboard events for mobile touch controls
+  const handleTouchKey = (key, type) => {
+    if (typeof window === 'undefined') return;
+    const codeMap = {
+      w: 'KeyW',
+      a: 'KeyA',
+      s: 'KeyS',
+      d: 'KeyD',
+      ' ': 'Space'
+    };
+    const event = new KeyboardEvent(type, {
+      key: key === ' ' ? ' ' : key,
+      code: codeMap[key] || key,
+      bubbles: true,
+      cancelable: true
+    });
+    window.dispatchEvent(event);
+  };
+
   return (
     <main className={styles.container}>
       <h1 className={`${styles.title} ${styles.pixelFont}`}>LUMINA</h1>
@@ -65,48 +84,123 @@ export default function Home() {
 
       <div className={styles.gameWrapper}>
         {/* Game Play Area */}
-        <div className="relative">
-          <GameCanvas
-            onStateChange={handleStateChange}
-            isPaused={isPaused}
-            gameActive={gameActive}
-            onGameOver={handleGameOver}
-          />
+        <div className="flex flex-col items-center gap-4">
+          <div className="relative">
+            <GameCanvas
+              onStateChange={handleStateChange}
+              isPaused={isPaused}
+              gameActive={gameActive}
+              onGameOver={handleGameOver}
+            />
 
-          {/* Start Screen Overlay */}
-          {!gameActive && !isGameOver && (
-            <div className={styles.overlay}>
-              <h2 className={`${styles.overlayTitle} ${styles.pixelFont}`}>CHOOSE YOUR DESTINY</h2>
-              <p className={styles.overlayText}>
-                Step into the procedural dungeon, defend against pixel slimes, gather gold treasures, level up, and find the glowing Pixel Core to travel deeper.
-              </p>
-              <button className={styles.btn} onClick={startGame}>
-                START GAME
-              </button>
-            </div>
-          )}
+            {/* Start Screen Overlay */}
+            {!gameActive && !isGameOver && (
+              <div className={styles.overlay}>
+                <h2 className={`${styles.overlayTitle} ${styles.pixelFont}`}>CHOOSE YOUR DESTINY</h2>
+                <p className={styles.overlayText}>
+                  Step into the procedural dungeon, defend against pixel slimes, gather gold treasures, level up, and find the glowing Pixel Core to travel deeper.
+                </p>
+                <button className={styles.btn} onClick={startGame}>
+                  START GAME
+                </button>
+              </div>
+            )}
 
-          {/* Pause Screen Overlay */}
-          {gameActive && isPaused && (
-            <div className={styles.overlay}>
-              <h2 className={`${styles.overlayTitle} ${styles.pixelFont}`}>GAME PAUSED</h2>
-              <p className={styles.overlayText}>Take a breath. The dungeon awaits your return.</p>
-              <button className={styles.btn} onClick={togglePause}>
-                RESUME
-              </button>
-            </div>
-          )}
+            {/* Pause Screen Overlay */}
+            {gameActive && isPaused && (
+              <div className={styles.overlay}>
+                <h2 className={`${styles.overlayTitle} ${styles.pixelFont}`}>GAME PAUSED</h2>
+                <p className={styles.overlayText}>Take a breath. The dungeon awaits your return.</p>
+                <button className={styles.btn} onClick={togglePause}>
+                  RESUME
+                </button>
+              </div>
+            )}
 
-          {/* Game Over Screen Overlay */}
-          {isGameOver && (
-            <div className={styles.overlay}>
-              <h2 className={`${styles.overlayTitle} ${styles.pixelFont}`} style={{ color: '#e63946' }}>DEFEAT</h2>
-              <p className={styles.overlayText}>
-                You fell on Stage {gameState.gameLevel}. Level reached: {gameState.level}. Gold gathered: {gameState.gold}.
-              </p>
-              <button className={styles.btn} onClick={startGame}>
-                TRY AGAIN
-              </button>
+            {/* Game Over Screen Overlay */}
+            {isGameOver && (
+              <div className={styles.overlay}>
+                <h2 className={`${styles.overlayTitle} ${styles.pixelFont}`} style={{ color: '#e63946' }}>DEFEAT</h2>
+                <p className={styles.overlayText}>
+                  You fell on Stage {gameState.gameLevel}. Level reached: {gameState.level}. Gold gathered: {gameState.gold}.
+                </p>
+                <button className={styles.btn} onClick={startGame}>
+                  TRY AGAIN
+                </button>
+              </div>
+            )}
+          </div>
+
+          {/* Virtual Mobile Controls */}
+          {gameActive && !isPaused && (
+            <div className={styles.mobileControls}>
+              {/* D-Pad */}
+              <div className={styles.dpad}>
+                <button 
+                  className={styles.dpadBtn} 
+                  style={{ gridArea: 'up' }}
+                  onTouchStart={() => handleTouchKey('w', 'keydown')}
+                  onTouchEnd={() => handleTouchKey('w', 'keyup')}
+                  onMouseDown={() => handleTouchKey('w', 'keydown')}
+                  onMouseUp={() => handleTouchKey('w', 'keyup')}
+                  onMouseLeave={() => handleTouchKey('w', 'keyup')}
+                >
+                  ▲
+                </button>
+                <button 
+                  className={styles.dpadBtn} 
+                  style={{ gridArea: 'left' }}
+                  onTouchStart={() => handleTouchKey('a', 'keydown')}
+                  onTouchEnd={() => handleTouchKey('a', 'keyup')}
+                  onMouseDown={() => handleTouchKey('a', 'keydown')}
+                  onMouseUp={() => handleTouchKey('a', 'keyup')}
+                  onMouseLeave={() => handleTouchKey('a', 'keyup')}
+                >
+                  ◀
+                </button>
+                <button 
+                  className={styles.dpadBtn} 
+                  style={{ gridArea: 'right' }}
+                  onTouchStart={() => handleTouchKey('d', 'keydown')}
+                  onTouchEnd={() => handleTouchKey('d', 'keyup')}
+                  onMouseDown={() => handleTouchKey('d', 'keydown')}
+                  onMouseUp={() => handleTouchKey('d', 'keyup')}
+                  onMouseLeave={() => handleTouchKey('d', 'keyup')}
+                >
+                  ▶
+                </button>
+                <button 
+                  className={styles.dpadBtn} 
+                  style={{ gridArea: 'down' }}
+                  onTouchStart={() => handleTouchKey('s', 'keydown')}
+                  onTouchEnd={() => handleTouchKey('s', 'keyup')}
+                  onMouseDown={() => handleTouchKey('s', 'keydown')}
+                  onMouseUp={() => handleTouchKey('s', 'keyup')}
+                  onMouseLeave={() => handleTouchKey('s', 'keyup')}
+                >
+                  ▼
+                </button>
+              </div>
+
+              {/* Action Buttons */}
+              <div className={styles.actionArea}>
+                <button 
+                  className={styles.mobileAttackBtn}
+                  onTouchStart={() => handleTouchKey(' ', 'keydown')}
+                  onTouchEnd={() => handleTouchKey(' ', 'keyup')}
+                  onMouseDown={() => handleTouchKey(' ', 'keydown')}
+                  onMouseUp={() => handleTouchKey(' ', 'keyup')}
+                >
+                  SWING
+                </button>
+                <button 
+                  className={styles.mobileHealBtn}
+                  onClick={handleQuickHeal}
+                  disabled={gameState.potions <= 0 || gameState.hp >= gameState.maxHp}
+                >
+                  🧪 HEAL ({gameState.potions})
+                </button>
+              </div>
             </div>
           )}
         </div>

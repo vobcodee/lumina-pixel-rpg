@@ -233,3 +233,107 @@
   margin-bottom: 2rem;
   color: #adb5bd;
 }
+
+/* Mobile Controls */
+.mobileControls {
+  display: none;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  width: 100%;
+  max-width: 720px;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(26, 28, 46, 0.4);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 900px) {
+  .mobileControls {
+    display: flex;
+  }
+}
+
+.dpad {
+  display: grid;
+  grid-template-areas: 
+    ". up ."
+    "left . right"
+    ". down .";
+  grid-template-columns: repeat(3, 50px);
+  grid-template-rows: repeat(3, 50px);
+  gap: 6px;
+}
+
+.dpadBtn {
+  background: #1a1c2e;
+  border: 2px solid #4cc9f0;
+  color: #4cc9f0;
+  border-radius: 8px;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  box-shadow: 0 3px 0 #0077b6;
+}
+
+.dpadBtn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #0077b6;
+}
+
+.actionArea {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mobileAttackBtn {
+  background: #d90429;
+  border: 2px solid #e63946;
+  color: #fff;
+  border-radius: 50%;
+  width: 70px;
+  height: 70px;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  box-shadow: 0 4px 0 #9b2226;
+}
+
+.mobileAttackBtn:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 #9b2226;
+}
+
+.mobileHealBtn {
+  background: #7209b7;
+  border: 2px solid #b5179e;
+  color: #fff;
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  font-family: 'Press Start 2P', monospace;
+  font-size: 0.65rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  touch-action: manipulation;
+  box-shadow: 0 3px 0 #560bad;
+}
+
+.mobileHealBtn:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 0 #560bad;
+}
